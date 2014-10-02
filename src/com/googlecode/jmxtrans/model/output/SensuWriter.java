@@ -38,6 +38,7 @@ public class SensuWriter extends BaseOutputWriter {
 	public final static String SETTING_HANDLER = "handler";
 	public final static String DEFAULT_SENSU_HOST = "localhost";
 	public final static String DEFAULT_SENSU_HANDLER = "graphite";
+	public static final String ROOT_PREFIX = "rootPrefix";
 
 	private final org.slf4j.Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -47,10 +48,17 @@ public class SensuWriter extends BaseOutputWriter {
 	 */
 	private String sensuhost;
 	private String sensuhandler;
+	private String rootPrefix = "";
 
 	public void validateSetup(Server server, Query query) throws ValidationException {
 		sensuhost = getStringSetting(SETTING_HOST, DEFAULT_SENSU_HOST);
 		sensuhandler = getStringSetting(SETTING_HANDLER, DEFAULT_SENSU_HANDLER);
+
+		String rootPrefixTmp = (String) this.getSettings().get(ROOT_PREFIX);
+		if (rootPrefixTmp != null) {
+			rootPrefix = rootPrefixTmp;
+		}
+
 		logger.info("Start Sensu writer connected to '{}' with handler {}", sensuhost, sensuhandler);
 	}
 
@@ -75,7 +83,7 @@ public class SensuWriter extends BaseOutputWriter {
 				for (Map.Entry<String, Object> values : resultValues.entrySet()) {
 					if (NumberUtils.isNumeric(values.getValue())) {
 						Object value = values.getValue();
-						jsonoutput.append(KeyUtils.getKeyString(server, query, result, values, typeNames, null)).append(" ")
+						jsonoutput.append(KeyUtils.getKeyString(server, query, result, values, typeNames, rootPrefix)).append(" ")
 								.append(value).append(" ")
 								.append(TimeUnit.SECONDS.convert(result.getEpoch(), TimeUnit.MILLISECONDS))
 								.append(System.getProperty("line.separator"));
