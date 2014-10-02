@@ -143,7 +143,6 @@ fi
 %config(noreplace)      %{xlibdir}
 %attr(0755,%{xuser}, %{xuser}) %{xlogdir}
 %{xappdir}/*
-%doc %{xappdir}/README.html
 %doc %{xappdir}/doc
 
 
