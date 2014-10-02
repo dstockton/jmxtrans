@@ -71,7 +71,7 @@ cp -rf doc %{buildroot}%{xappdir}
 cp %{SOURCE2} %{buildroot}%{_systemdir}/jmxtrans.service
 
 # ensure shell scripts are executable
-chmod 755 %{buildroot}%{xappdir}/*.sh
+chmod 755 %{buildroot}%{xappdir}/**/*.sh
 
 %clean
 rm -rf %{buildroot}
