@@ -37,7 +37,7 @@ fi
 RETVAL=0
 prog="jmxtrans"
 user="jmxtrans"
-exec="/usr/share/jmxtrans/jmxtrans.sh"
+exec="/usr/share/jmxtrans/bin/jmxtrans.sh"
 lockdir=/var/lock/subsys
 lockfile=$lockdir/jmxtrans
 config=/etc/sysconfig/jmxtrans

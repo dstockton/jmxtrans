@@ -101,7 +101,7 @@ if [ $1 = 1 ]; then
 
   # populate sysconf file
   echo "# configuration file for package jmxtrans" > %{xconf}
-  echo "export JAR_FILE=\"/usr/share/jmxtrans/jmxtrans-all.jar\"" >> %{xconf}
+  echo "export JAR_FILE=\"/usr/share/jmxtrans/lib/jmxtrans-all.jar\"" >> %{xconf}
   echo "export LOG_DIR=\"/var/log/jmxtrans\"" >> %{xconf}
   echo "export SECONDS_BETWEEN_RUNS=60" >> %{xconf}
   echo "export JSON_DIR=\"%{xlibdir}\"" >> %{xconf}
